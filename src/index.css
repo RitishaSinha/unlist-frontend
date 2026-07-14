@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@700&display=swap');
+:root {
+--bg: #0F0F0F;
+--surface: #1A1A1A;
+--border: #2A2A2A;
+--amber: #F5A623;
+--text-primary: #F0F0F0;
+--text-secondary: #9A9A9A;
+--minor: #4CAF50;
+--moderate: #FF9800;
+--major: #F44336;
+--radius: 8px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  background-image: url("./bg.png");
+  background-repeat: repeat;
+  background-size: 1880px 3620px;
+  background-attachment: fixed;
+}
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+.navbar {
+display: flex; justify-content: space-between; align-items: center;
+padding: 24px; max-width: 1100px; margin: 0 auto;
+}
+.navbar .logo { font-weight: 700; font-size: 20px; cursor: pointer; font-family: 'Syne', sans-serif; }
+.navbar .links { display: flex; gap: 24px; color: var(--text-secondary); font-size: 14px; }
+.card {
+background: var(--surface);
+border: 1px solid var(--border);
+border-radius: var(--radius);
+padding: 20px;
+margin-bottom: 16px;
+}
+.btn-amber {
+background: var(--amber); color: #0F0F0F; border: none;
+border-radius: var(--radius); padding: 12px 22px; font-weight: 600;
+font-size: 14px; cursor: pointer;
+}
+.btn-amber:hover { opacity: 0.9; }
+.btn-amber:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-outline {
+background: transparent; color: var(--amber); border: 1px solid var(--amber);
+border-radius: var(--radius); padding: 12px 22px; font-weight: 600;
+font-size: 14px; cursor: pointer;
+}
+.tab-toggle { display: flex; gap: 10px; justify-content: center; margin: 24px 0; }
+.tab-btn {
+padding: 10px 22px; border-radius: 999px; font-size: 14px; cursor: pointer;
+background: transparent; color: var(--text-secondary); border: 1px solid var(--border);
+}
+.tab-btn.active { color: var(--text-primary); border: 1px solid var(--amber); }
+input[type="text"], input[type="url"], input[type="email"], input[type="password"] {
+width: 100%; padding: 14px; border-radius: var(--radius); border: none;
+background: #E8E8E8; color: #1A1A1A; font-size: 14px; margin-bottom: 10px;
+}
+.tag-minor, .tag-moderate, .tag-major {
+display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px;
+}
+.tag-minor { background: var(--minor); }
+.tag-moderate { background: var(--moderate); }
+.tag-major { background: var(--major); }
+.text-secondary { color: var(--text-secondary); font-size: 13px; }
+.text-amber { color: var(--amber); }
+.error-box {
+border: 1px solid var(--amber); border-radius: var(--radius); padding: 12px;
+color: var(--amber); font-size: 13px; margin-top: 8px;
+}
+.flex-row { display: flex; gap: 16px; }
+.flex-1 { flex: 1; }
+.btn-amber:active {
+  transform: scale(0.96);
+  background: #c98a1a;
+}
+
+.btn-outline:active {
+  transform: scale(0.96);
+  background: rgba(245, 166, 35, 0.1);
+}

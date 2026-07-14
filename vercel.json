@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://unlist-backend-s280.onrender.com/:path*"
+    }
+  ]
+}

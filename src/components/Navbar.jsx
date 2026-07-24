@@ -1,4 +1,4 @@
-export default function Navbar({ onLogoClick, onSignIn, user, onLogout }) {
+export default function Navbar({ onLogoClick, onSignIn, user, onLogout, onSaved }) {
 function scrollToHowItWorks() {
 const el = document.getElementById("how-it-works");
 if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -11,11 +11,16 @@ return (
 <div className="navbar">
 <div className="logo" onClick={onLogoClick}>Unlist</div>
 <div className="links" style={{ alignItems: "center" }}>
-<span style={{ cursor: "pointer", color: "#d9d9d9"}} onClick={onLogoClick}>Home</span>
-<span style={{ cursor: "pointer", color: "#d9d9d9"}} onClick={scrollToHowItWorks}>About Us</span>
-<span style={{ cursor: "pointer", color: "#d9d9d9"}} onClick={scrollToFooter}>Contact</span>
+<span style={{ cursor: "pointer", color: "#d9d9d9" }} onClick={onLogoClick}>Home</span>
+<span style={{ cursor: "pointer", color: "#d9d9d9" }} onClick={scrollToHowItWorks}>About Us</span>
+<span style={{ cursor: "pointer", color: "#d9d9d9" }} onClick={scrollToFooter}>Contact Us</span>
+{user && (
+<span style={{ cursor: "pointer", color: "#d9d9d9" }} onClick={onSaved}>
+Saved
+</span>
+)}
 {user ? (
-<div style={{ display: "flex", alignItems: "center", gap: "10px",color:"#d9d9d9" }}>
+<div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
 {user.picture && (
 <img src={user.picture} alt="avatar"
 style={{ width: "28px", height: "28px", borderRadius: "50%" }} />

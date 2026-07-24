@@ -1,10 +1,21 @@
-import { useState } from "react";
-import { apiPost } from "../api/client";
+import { useState, useEffect } from "react";
+import { apiPost, apiGet } from "../api/client";
 import FaultCard from "./FaultCard";
 import ChecklistCard from "./ChecklistCard";
 export default function AnalyseResult({ report, onShared, onBack, token }) {
 const [tab, setTab] = useState("faults");
 const [saved, setSaved] = useState(false);
+
+useEffect(() => {
+  if (!token) return;
+  apiGet("/saved", token).then((list) => {
+    const alreadySaved = list.some(
+      (item) => item.report?.car?.title === report.car?.title &&
+                item.report?.red_flag_score === report.red_flag_score
+    );
+    if (alreadySaved) setSaved(true);
+  }).catch(() => {});
+}, []);
 const [saveLoading, setSaveLoading] = useState(false);
 async function handleSave() {
 if (!token) return;

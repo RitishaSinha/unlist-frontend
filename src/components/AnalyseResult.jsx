@@ -2,8 +2,23 @@ import { useState } from "react";
 import { apiPost } from "../api/client";
 import FaultCard from "./FaultCard";
 import ChecklistCard from "./ChecklistCard";
-export default function AnalyseResult({ report, onShared, onBack }) {
+export default function AnalyseResult({ report, onShared, onBack, token }) {
 const [tab, setTab] = useState("faults");
+const [saved, setSaved] = useState(false);
+const [saveLoading, setSaveLoading] = useState(false);
+async function handleSave() {
+if (!token) return;
+setSaveLoading(true);
+try {
+const title = report.car?.title || "Saved Report";
+await apiPost("/saved", { report, title }, token);
+setSaved(true);
+} catch (e) {
+console.error("Save failed", e);
+} finally {
+setSaveLoading(false);
+}
+}
 async function handleShare() {
 const result = await apiPost("/share", { report });
 onShared({ id: result.id, report });
@@ -22,10 +37,19 @@ report.platform}
 <h1 className="text-amber" style={{ margin: "4px 0" }}>{report.red_flag_score}</h1>
 <p>{report.summary}</p>
 </div>
-<div className="tab-toggle" style={{ justifyContent: "flex-start" }}>
-<div className={`tab-btn ${tab === "faults" ? "active" : ""}`} onClick={() => setTab("faults")}>Faults</div>
-<div className={`tab-btn ${tab === "checklist" ? "active" : ""}`} onClick={() => setTab("checklist"
-)}>Test drive checklist</div>
+<div className="tab-toggle" style={{ justifyContent: "flex-start", alignItems: "center" }}>
+  <div className={`tab-btn ${tab === "faults" ? "active" : ""}`} onClick={() => setTab("faults")}>Faults</div>
+  <div className={`tab-btn ${tab === "checklist" ? "active" : ""}`} onClick={() => setTab("checklist")}>Test drive checklist</div>
+  {token && (
+    <button
+      className={saved ? "btn-outline" : "btn-amber"}
+      onClick={handleSave}
+      disabled={saveLoading || saved}
+      style={{ marginLeft: "auto" }}
+    >
+      {saved ? "Saved ✓" : saveLoading ? "Saving..." : "Save report"}
+    </button>
+  )}
 </div>
 {tab === "faults" && (
 <div>

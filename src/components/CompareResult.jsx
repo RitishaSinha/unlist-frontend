@@ -1,6 +1,24 @@
 import { apiPost } from "../api/client";
 import CompareCard from "./CompareCard";
-export default function CompareResult({ result, onShared, onBack }) {
+export default function CompareResult({ result, onShared, onBack, token }) {
+const [saved, setSaved] = useState(false);
+const [saveLoading, setSaveLoading] = useState(false);
+async function handleSave() {
+if (!token) return;
+setSaveLoading(true);
+try {
+const firstCar = result.cars?.find(c => !c.error);
+const title = firstCar?.car?.title
+? `Compare: ${firstCar.car.title} & others`
+: "Saved Comparison";
+await apiPost("/saved", { report: result, title }, token);
+setSaved(true);
+} catch (e) {
+console.error("Save failed", e);
+} finally {
+setSaveLoading(false);
+}
+}
 async function handleShare() {
 const shared = await apiPost("/share", { report: result });
 onShared({ id: shared.id, report: result });
@@ -33,6 +51,15 @@ return (
 )}
 <div className="flex-row" style={{ marginTop: "16px" }}>
 <button className="btn-outline" onClick={handleShare}>Share comparison</button>
+{token && (
+<button
+className={saved ? "btn-outline" : "btn-amber"}
+onClick={handleSave}
+disabled={saveLoading || saved}
+>
+{saved ? "Saved ✓" : saveLoading ? "Saving..." : "Save comparison"}
+</button>
+)}
 </div>
 </div>
 );

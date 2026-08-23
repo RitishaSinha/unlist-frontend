@@ -141,9 +141,3 @@ Locally, `vite.config.js` does the same via the `server.proxy` config.
 | Auth | Google OAuth 2.0 + bcrypt email/password, 30-day JWTs |
 | Hosting | Render |
 
----
-
-## Author
-
-**Ritisha Sinha** — Frontend Development  
-Backend by: *(backend dev name + GitHub link)*

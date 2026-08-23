@@ -1,7 +1,4 @@
-# Unlist — Frontend
-
-> Know what's wrong before you buy.
-
+# Unlist
 Unlist is a used car audit tool that surfaces every inspection fault from Spinny and Cars24 listings, ranks them by ML severity, and gives buyers a plain-English AI summary and test drive checklist before visiting the showroom.
 
 🔗 **Live site:** https://unlist-frontend.vercel.app

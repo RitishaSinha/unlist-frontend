@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { apiPost } from "../api/client";
 import CompareCard from "./CompareCard";
 export default function CompareResult({ result, onShared, onBack, token }) {

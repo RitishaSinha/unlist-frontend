@@ -17,9 +17,6 @@ body {
   background-color: var(--bg);
   color: var(--text-primary);
   font-family: 'Inter', sans-serif;
-  /* background-image: url("./bg.webp");
-  background-repeat: repeat;
-  background-size: 1880px 3620px; */
 }
 body::before {
   content: "";
